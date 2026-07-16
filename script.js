@@ -34,3 +34,14 @@ const revealObserver = new IntersectionObserver((entries, observer) => {
 
 document.querySelectorAll('.reveal').forEach((element) => revealObserver.observe(element));
 document.querySelector('#year').textContent = new Date().getFullYear();
+
+const backToTopLink = document.querySelector('.back-to-top');
+
+backToTopLink?.addEventListener('click', (event) => {
+  event.preventDefault();
+  window.scrollTo({
+    top: 0,
+    behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'
+  });
+  history.replaceState(null, '', `${window.location.pathname}${window.location.search}#top`);
+});
